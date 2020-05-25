@@ -2,11 +2,12 @@ import React, { useState } from "react";
 import babyNamesData from "../data/babyNamesData.json";
 import NamesGrid from "./NamesGrid";
 import SearchByName from "./SearchByName";
+import FavoritesNames from "./FavoritesNames";
 import "../grid.css";
 function State() {
   const [allNames, setAllNames] = useState(babyNamesData);
   const [selectedInputValue, setSelectedInputValue] = useState("");
-  const [favoritesNames, setFavoritesNames] = useState([]);
+  const [allFavoritesNames, setAllFavoritesNames] = useState([]);
 
   // console.log(typeof clickedName);
   const inAlphabeticOrder = allNames.sort(sortArray);
@@ -34,38 +35,18 @@ function State() {
 
   const removedNameAddToFavorits = (id) => {
     const removeName = allNames.filter((name) => name.id === id);
-    setFavoritesNames([...favoritesNames, { removeName }]);
+    setAllFavoritesNames([...allFavoritesNames, { removeName }]);
   };
-
-  // const handleRemoveFavoriteName = (id) =>
-  console.log("favoritesNames", favoritesNames);
+  const filterNamesBySearchInput = allNames
+    ? filterInputValues(allNames, selectedInputValue)
+    : null;
 
   return (
     <div className="border">
       <SearchByName setSelectedInputValue={setSelectedInputValue} />
-      <div className="favorites">
-        <div className="row">
-          Favorites:
-          {favoritesNames.map((remove) =>
-            remove.removeName.map((name, index) => (
-              <p
-                key={index}
-                className={
-                  name.sex === "f"
-                    ? "femaleName"
-                    : null || name.sex === "m"
-                    ? "maleName"
-                    : null
-                }
-              >
-                {name.name}
-              </p>
-            ))
-          )}
-        </div>
-      </div>
+      <FavoritesNames allFavoritesNames={allFavoritesNames} />
       <NamesGrid
-        allNames={filterInputValues(allNames, selectedInputValue)}
+        allNames={filterNamesBySearchInput}
         handleRemoveName={handleRemoveName}
         removedNameAddToFavorits={removedNameAddToFavorits}
       />
