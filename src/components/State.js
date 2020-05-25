@@ -6,7 +6,7 @@ import "../grid.css";
 function State() {
   const [allNames, setAllNames] = useState(babyNamesData);
   const [selectedInputValue, setSelectedInputValue] = useState("");
-  const [clickedName, setClickedName] = useState("");
+  const [favoritesNames, setFavoritesNames] = useState([]);
 
   // console.log(typeof clickedName);
   const inAlphabeticOrder = allNames.sort(sortArray);
@@ -28,17 +28,46 @@ function State() {
     );
   };
 
-  // console.log(allNames);
-  // console.log(clickedName);
+  const handleRemoveName = (id) => {
+    setAllNames(allNames.filter((name) => name.id !== id));
+  };
+
+  const removedNameAddToFavorits = (id) => {
+    const removeName = allNames.filter((name) => name.id === id);
+    setFavoritesNames([...favoritesNames, { removeName }]);
+  };
+
+  // const handleRemoveFavoriteName = (id) =>
+  console.log("favoritesNames", favoritesNames);
+
   return (
     <div className="border">
       <SearchByName setSelectedInputValue={setSelectedInputValue} />
-      <div>
-        <p className="favorites">Favorites:</p>
+      <div className="favorites">
+        <div className="row">
+          Favorites:
+          {favoritesNames.map((remove) =>
+            remove.removeName.map((name, index) => (
+              <p
+                key={index}
+                className={
+                  name.sex === "f"
+                    ? "femaleName"
+                    : null || name.sex === "m"
+                    ? "maleName"
+                    : null
+                }
+              >
+                {name.name}
+              </p>
+            ))
+          )}
+        </div>
       </div>
       <NamesGrid
         allNames={filterInputValues(allNames, selectedInputValue)}
-        setClickedName={setClickedName}
+        handleRemoveName={handleRemoveName}
+        removedNameAddToFavorits={removedNameAddToFavorits}
       />
     </div>
   );

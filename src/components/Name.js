@@ -1,9 +1,12 @@
 import React from "react";
 
-function Name({ name, setClickedName }) {
+function Name({ name, handleRemoveName, removedNameAddToFavorits }) {
   return (
     <div
-      onClick={() => setClickedName(name.id)}
+      onClick={() => {
+        handleRemoveName(name.id);
+        removedNameAddToFavorits(name.id);
+      }}
       className={
         name.sex === "f"
           ? "femaleName"
