@@ -3,12 +3,14 @@ import babyNamesData from "../data/babyNamesData.json";
 import NamesGrid from "./NamesGrid";
 import SearchByName from "./SearchByName";
 import FavoritesNames from "./FavoritesNames";
+import GenderButtons from "./GenderButtons";
 import "../grid.css";
+
 function State() {
   const [allNames, setAllNames] = useState(babyNamesData);
   const [selectedInputValue, setSelectedInputValue] = useState("");
   const [allFavoritesNames, setAllFavoritesNames] = useState([]);
-
+  const [selectedGender, setSelectedGender] = useState(["all"]);
   // console.log(typeof clickedName);
   const inAlphabeticOrder = allNames.sort(sortArray);
 
@@ -37,16 +39,26 @@ function State() {
     const removeName = allNames.filter((name) => name.id === id);
     setAllFavoritesNames([...allFavoritesNames, { removeName }]);
   };
-  const filterNamesBySearchInput = allNames
+  const filterNamesBySearchInput = selectedInputValue
     ? filterInputValues(allNames, selectedInputValue)
-    : null;
+    : allNames;
+
+  const filterNamesByGenderRadiusButtons = (names, gender) => {
+    return names.filter((name) => name.sex === gender);
+  };
+
+  const gendersToShow =
+    selectedGender === "all"
+      ? allNames
+      : filterNamesByGenderRadiusButtons(allNames, selectedGender);
 
   return (
     <div className="border">
       <SearchByName setSelectedInputValue={setSelectedInputValue} />
+      <GenderButtons setSelectedGender={setSelectedGender} />
       <FavoritesNames allFavoritesNames={allFavoritesNames} />
       <NamesGrid
-        allNames={filterNamesBySearchInput}
+        allNames={selectedInputValue ? filterNamesBySearchInput : gendersToShow}
         handleRemoveName={handleRemoveName}
         removedNameAddToFavorits={removedNameAddToFavorits}
       />

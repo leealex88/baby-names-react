@@ -8,21 +8,21 @@ function GenderButtons({ setSelectedGender }) {
         value="all"
         name="gender"
         onChange={(e) => setSelectedGender(e.target.value)}
-      />{" "}
+      />
       All
       <input
         type="radio"
         value="m"
         name="gender"
         onChange={(e) => setSelectedGender(e.target.value)}
-      />{" "}
+      />
       Male
       <input
         type="radio"
         value="f"
         name="gender"
         onChange={(e) => setSelectedGender(e.target.value)}
-      />{" "}
+      />
       Female
     </div>
   );
