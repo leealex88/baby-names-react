@@ -58,3 +58,36 @@
 .favorites {
   margin: 50px;
 }
+
+.all {
+  background-color: #D8D8D8;
+  color: grey;
+  border-radius: 6px;
+  height: 35px;
+  width: 80px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  padding: 8px;
+}
+
+.male {
+  background-color: #82B3FF;
+  border-radius: 6px;
+  height: 35px;
+  width: 80px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  padding: 8px;
+  color: #4169E1;
+}
+
+.femal {
+  background-color: #FEC8D8;
+  border-radius: 6px;
+  height: 35px;
+  width: 80px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  padding: 8px;
+  color: deeppink;
+}
