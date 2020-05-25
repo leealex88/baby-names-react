@@ -10,7 +10,7 @@ function State() {
   const [allNames, setAllNames] = useState(babyNamesData);
   const [selectedInputValue, setSelectedInputValue] = useState("");
   const [allFavoritesNames, setAllFavoritesNames] = useState([]);
-  const [selectedGender, setSelectedGender] = useState(["all"]);
+  const [selectedGender, setSelectedGender] = useState("all");
   // console.log(typeof clickedName);
   const inAlphabeticOrder = allNames.sort(sortArray);
 

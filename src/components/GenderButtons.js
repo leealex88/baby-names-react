@@ -7,6 +7,7 @@ function GenderButtons({ setSelectedGender }) {
         type="radio"
         value="all"
         name="gender"
+        className="all"
         onChange={(e) => setSelectedGender(e.target.value)}
       />
       All
@@ -14,6 +15,7 @@ function GenderButtons({ setSelectedGender }) {
         type="radio"
         value="m"
         name="gender"
+        className="male"
         onChange={(e) => setSelectedGender(e.target.value)}
       />
       Male
@@ -21,6 +23,7 @@ function GenderButtons({ setSelectedGender }) {
         type="radio"
         value="f"
         name="gender"
+        className="femal"
         onChange={(e) => setSelectedGender(e.target.value)}
       />
       Female
