@@ -54,8 +54,10 @@ function State() {
 
   return (
     <div className="border">
-      <SearchByName setSelectedInputValue={setSelectedInputValue} />
-      <GenderButtons setSelectedGender={setSelectedGender} />
+      <div className="row">
+        <SearchByName setSelectedInputValue={setSelectedInputValue} />
+        <GenderButtons setSelectedGender={setSelectedGender} />
+      </div>
       <FavoritesNames allFavoritesNames={allFavoritesNames} />
       <NamesGrid
         allNames={selectedInputValue ? filterNamesBySearchInput : gendersToShow}
