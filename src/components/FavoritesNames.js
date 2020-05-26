@@ -1,12 +1,20 @@
 import React from "react";
 
-function FavoritesNames({ allFavoritesNames, handleRemovedFavoriteNames }) {
+function FavoritesNames({
+  allFavoritesNames,
+  handleRemoveFavoriteName,
+  removedFavoriteNameAddToThe,
+}) {
   return (
     <div className="favorites">
       <div className="row">
         Favorites:
         {allFavoritesNames.map((name, index) => (
           <p
+            onClick={() => {
+              handleRemoveFavoriteName(name.id);
+              removedFavoriteNameAddToThe(name.id);
+            }}
             key={index}
             className={
               name.sex === "f"

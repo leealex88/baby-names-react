@@ -10,8 +10,9 @@ function State() {
   const [allNames, setAllNames] = useState(babyNamesData);
   const [selectedInputValue, setSelectedInputValue] = useState("");
   const [allFavoritesNames, setAllFavoritesNames] = useState([]);
+  const [removedFavoritesNames, setRemovedFavoriteNames] = useState([]);
   const [selectedGender, setSelectedGender] = useState("all");
-  // console.log(typeof clickedName);
+
   const inAlphabeticOrder = allNames.sort(sortArray);
 
   function sortArray(a, b) {
@@ -33,18 +34,21 @@ function State() {
 
   const handleRemoveName = (id) => {
     setAllNames(allNames.filter((name) => name.id !== id));
-    console.log("I have removed name", allNames);
   };
 
+  const handleRemoveFavoriteName = (id) => {
+    const removedFav = allFavoritesNames.filter((name) => name.id !== id);
+    setAllFavoritesNames(removedFav);
+  };
+
+  const removedFavoriteNameAddToThe = (id) => {
+    const removedFavorName = allFavoritesNames.find((name) => name.id === id);
+    setAllNames([...allNames, removedFavorName]);
+    console.log("removedFav", removedFavorName);
+  };
   const removedNameAddToFavorits = (id) => {
     const removedName = allNames.find((name) => name.id === id);
-    // const newFavorites = [...allFavoritesNames, removedName];
-    // const newFavorites = [...allFavoritesNames];
-    // newFavorites.push(removedName);
-
-    // setAllFavoritesNames(newFavorites);
     setAllFavoritesNames([...allFavoritesNames, removedName]);
-    console.log("stop the debugger", allFavoritesNames);
   };
   const filterNamesBySearchInput = selectedInputValue
     ? filterInputValues(allNames, selectedInputValue)
@@ -58,14 +62,21 @@ function State() {
     selectedGender === "all"
       ? allNames
       : filterNamesByGenderRadiusButtons(allNames, selectedGender);
-  console.log(allFavoritesNames);
+
+  console.log("allFavoritesNames", allFavoritesNames);
+  console.log("removedFavoritesNames", removedFavoritesNames);
+
   return (
     <div className="border">
       <div className="row">
         <SearchByName setSelectedInputValue={setSelectedInputValue} />
         <GenderButtons setSelectedGender={setSelectedGender} />
       </div>
-      <FavoritesNames allFavoritesNames={allFavoritesNames} />
+      <FavoritesNames
+        allFavoritesNames={allFavoritesNames}
+        handleRemoveFavoriteName={handleRemoveFavoriteName}
+        removedFavoriteNameAddToThe={removedFavoriteNameAddToThe}
+      />
       <NamesGrid
         allNames={selectedInputValue ? filterNamesBySearchInput : gendersToShow}
         handleRemoveName={handleRemoveName}
