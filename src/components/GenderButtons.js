@@ -10,7 +10,6 @@ function GenderButtons({ setSelectedGender }) {
           name="gender"
           onChange={(e) => setSelectedGender(e.target.value)}
         />
-        All
       </div>
       <div className="male">
         <input
@@ -19,7 +18,6 @@ function GenderButtons({ setSelectedGender }) {
           name="gender"
           onChange={(e) => setSelectedGender(e.target.value)}
         />
-        Male
       </div>
       <div className="femal">
         <input
@@ -28,7 +26,6 @@ function GenderButtons({ setSelectedGender }) {
           name="gender"
           onChange={(e) => setSelectedGender(e.target.value)}
         />
-        Femal
       </div>
     </Fragment>
   );

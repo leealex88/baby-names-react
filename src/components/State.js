@@ -33,11 +33,18 @@ function State() {
 
   const handleRemoveName = (id) => {
     setAllNames(allNames.filter((name) => name.id !== id));
+    console.log("I have removed name", allNames);
   };
 
   const removedNameAddToFavorits = (id) => {
-    const removeName = allNames.filter((name) => name.id === id);
-    setAllFavoritesNames([...allFavoritesNames, { removeName }]);
+    const removedName = allNames.find((name) => name.id === id);
+    // const newFavorites = [...allFavoritesNames, removedName];
+    // const newFavorites = [...allFavoritesNames];
+    // newFavorites.push(removedName);
+
+    // setAllFavoritesNames(newFavorites);
+    setAllFavoritesNames([...allFavoritesNames, removedName]);
+    console.log("stop the debugger", allFavoritesNames);
   };
   const filterNamesBySearchInput = selectedInputValue
     ? filterInputValues(allNames, selectedInputValue)
@@ -51,7 +58,7 @@ function State() {
     selectedGender === "all"
       ? allNames
       : filterNamesByGenderRadiusButtons(allNames, selectedGender);
-
+  console.log(allFavoritesNames);
   return (
     <div className="border">
       <div className="row">
